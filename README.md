@@ -34,5 +34,12 @@ Il movimento è gestito da una seconda **ESP32**.
 
 ---
 
+# REPO
+-/movimento contiene il codice relativo al movimento
+-/visione contiene il codice relativo alla visione
+-/elaborazione_img contiene il codice relativo alla elaborazione delle immagini
+
+---
+
 ## Licenza
 Distribuito sotto licenza **MIT**. Vedi il file `LICENSE` per i dettagli.
