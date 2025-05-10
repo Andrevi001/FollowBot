@@ -10,7 +10,7 @@ Il movimento è gestito da una seconda **ESP32**.
 ## Caratteristiche
 - Rilevamento dei gesti tramite **ESP32-S3 CAM**
 - Movimento autonomo 4WD controllato da **ESP32**
-- Alimentazione tramite 4 batterie **18650** ricaricabili
+- Elaborazione immagine tramite **Python**
 
 ---
 
@@ -23,6 +23,7 @@ Il movimento è gestito da una seconda **ESP32**.
 - 4x **Motori DC** per la trazione
 - 2x **LM2596** per la regolazione della tensione
 - **Wi-Fi** per la comunicazione tra ESP32-CAM e server
+- 4x **Batterie 18650** per l'alimentazione
 - **PlatformIO** o **Arduino IDE** per la programmazione
 - **Python** sul server per l’elaborazione delle immagini e il riconoscimento dei gesti
 
