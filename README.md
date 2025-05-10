@@ -34,10 +34,10 @@ Il movimento è gestito da una seconda **ESP32**.
 
 ---
 
-# REPO
--/movimento contiene il codice relativo al movimento
--/visione contiene il codice relativo alla visione
--/elaborazione_img contiene il codice relativo alla elaborazione delle immagini
+## REPO
+- /movimento contiene il codice relativo al movimento
+- /visione contiene il codice relativo alla visione
+- /elaborazione_img contiene il codice relativo alla elaborazione delle immagini
 
 ---
 
