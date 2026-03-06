@@ -18,7 +18,7 @@ Se ci sono più volti presenti nel frame il comportamento è imprevedibile.
 
 ## Tecnologie e componenti
 - **ESP32** per il controllo del movimento
-- **ESP32-WROVER-KIT** per la visione artificiale
+- **ESP32-WROVER-KIT** per la cattura immagine
 - 2x **TB6612FNG** per il controllo dei motori DC
 - 2x **Servo motori 180°** per la stabilizzazione dell’immagine e il puntamento
 - 4x **Motori DC** per la trazione
@@ -27,7 +27,7 @@ Se ci sono più volti presenti nel frame il comportamento è imprevedibile.
 - **UART** per la cominicazione tra le ESP32.
 - 4x **Batterie 18650** per l'alimentazione
 - **PlatformIO** per la programmazione
-- **Python** sul server per l’elaborazione delle immagini e il riconoscimento dei gesti
+- **Python** sul server per l’elaborazione delle immagini
 
 ---
 
