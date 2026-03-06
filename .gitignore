@@ -1,0 +1,41 @@
+# ---- Python (server) ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+venv/
+.env
+*.log
+
+# ---- PlatformIO/Arduino ----
+.pio/
+.pioenvs/
+.build/
+build/
+*.bin
+*.elf
+*.map
+*.hex
+*.ino.*
+*.d
+
+# ---- VSCode / IDE ----
+.vscode/
+*.code-workspace
+
+# ---- System files ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Compiled object files ----
+*.o
+*.obj
+
+# ---- Firmware upload files ----
+*.eep
+*.elf
+*.lss
+*.sym
+*.hex
