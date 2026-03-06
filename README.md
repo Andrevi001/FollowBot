@@ -5,7 +5,7 @@ Il volto viene rilevato tramite OV3660 montata su una **ESP32-WROVER-KIT**, che 
 Il server elabora i dati visivi e restituisce i comandi, che vengono inoltrati al sistema di movimento tramite un collegamento fisico.  
 Il movimento è gestito da una seconda **ESP32**.
 
-Se ci sono più volti presenti nel frame il comportamneto è imprevedibile.
+Se ci sono più volti presenti nel frame il comportamento è imprevedibile.
 
 ---
 
@@ -37,9 +37,9 @@ Se ci sono più volti presenti nel frame il comportamneto è imprevedibile.
 ---
 
 ## REPO
-- /movimento contiene il codice relativo al movimento
-- /visione contiene il codice relativo alla visione
-- /Server contiene il codice relativo alla elaborazione delle immagini
+- /followbot_body contiene il codice relativo al movimento
+- /followbot_eyes contiene il codice relativo alla visione
+- /server contiene il codice relativo alla elaborazione delle immagini
 
 ---
 
