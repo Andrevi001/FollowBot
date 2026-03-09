@@ -33,7 +33,7 @@ Se ci sono più volti presenti nel frame il comportamneto è imprevedibile.
 
 ## Uso
 1. Accendere il robot.
-2. Una volta stabilita la connessione Wi-Fi col server, il robot inizierà a rilevare il volto e a muoversi in modo autonomo tenendosi tra 100 cm e i 170 cm da volto.
+2. Una volta stabilita la connessione Wi-Fi col server, il robot inizierà a rilevare il volto e a muoversi in modo autonomo tenendosi tra 120 cm e i 170 cm da volto.
 ---
 
 ## REPO
