@@ -7,10 +7,9 @@ import math
 K = 2556 #costante per misurare la distanza
 
 Width, Height = 160, 120
-Fwidth, Fheight = 320, 320
+Fwidth, Fheight = 240, 180
 
 model = cv2.FaceDetectorYN.create("yunet.onnx", "", (Fwidth, Fheight))
-model.setInputSize((Fwidth, Fheight))
 
 sock = socket.socket()
 sock.bind(('0.0.0.0', 1234))
@@ -49,16 +48,26 @@ try:
         frame_data = read_exact(conn, frame_size)
 
         # Conversione da RGB565 a BGR
-        rgb565 = np.frombuffer(frame_data, dtype='<u2').reshape((Height, Width))
-        rgb565 = (rgb565 >> 8) | (rgb565 << 8)  # Swap byte high/low
+        '''rgb565 = np.frombuffer(frame_data, dtype='<u2').reshape((Height, Width))
+        rgb565 = (rgb565 >> 8) | (rgb565 << 8)
         bgr = np.zeros((Height, Width, 3), dtype=np.uint8)
-        bgr[..., 2] = ((rgb565 >> 11) & 0x1F) << 3  # Rosso
-        bgr[..., 1] = ((rgb565 >> 5) & 0x3F) << 2   # Verde
-        bgr[..., 0] = (rgb565 & 0x1F) << 3          # Blu
-        frame = cv2.flip(bgr, -1)
+        bgr[..., 2] = ((rgb565 >> 11) & 0x1F) << 3
+        bgr[..., 1] = ((rgb565 >> 5) & 0x3F) << 2
+        bgr[..., 0] = (rgb565 & 0x1F) << 3
+        frame = cv2.flip(bgr, -1)'''
+        rgb565 = np.frombuffer(frame_data, dtype=np.uint16).reshape((Height, Width))
+        rgb565 = (rgb565 >> 8) | (rgb565 << 8)
+
+        r = ((rgb565 >> 11) & 0x1F) * 255 // 31
+        g = ((rgb565 >> 5) & 0x3F) * 255 // 63
+        b = (rgb565 & 0x1F) * 255 // 31
+
+        frame = np.dstack((b, g, r)).astype(np.uint8)
+        frame = cv2.flip(frame, -1)
+        
 
         # Face detection
-        frame_resized = cv2.resize(frame, (Fwidth, Fheight), interpolation=cv2.INTER_CUBIC)
+        frame_resized = cv2.resize(frame, (Fwidth, Fheight), interpolation=cv2.INTER_NEAREST)
         _, faces = model.detect(frame_resized)
         
         pan = 0

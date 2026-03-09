@@ -71,9 +71,8 @@ void centerBody() {
 void decideFwBw(uint8_t distance) {
   if (distance > 170 ) {
     Forward();
-  } else if (distance < 100 ) {
+  } else if (distance < 120 ) {
     Backward();
   } else {
     Stop();
-  }
 }
