@@ -10,6 +10,7 @@ Width, Height = 160, 120
 Fwidth, Fheight = 240, 180
 
 model = cv2.FaceDetectorYN.create("yunet.onnx", "", (Fwidth, Fheight))
+model.setInputSize((Fwidth, Fheight))
 
 sock = socket.socket()
 sock.bind(('0.0.0.0', 1234))
