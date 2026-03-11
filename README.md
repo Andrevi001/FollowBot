@@ -18,7 +18,7 @@ Se ci sono più volti presenti nel frame il comportamneto è imprevedibile.
 
 ## Tecnologie e componenti
 - **ESP32** per il controllo del movimento
-- **ESP32-WROVER-KIT** per la visione artificiale
+- **ESP32-WROVER-KIT** per la cattura immagini
 - 2x **TB6612FNG** per il controllo dei motori DC
 - 2x **Servo motori 180°** per la stabilizzazione dell’immagine e il puntamento
 - 4x **Motori DC** per la trazione
