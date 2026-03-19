@@ -49,13 +49,6 @@ try:
         frame_data = read_exact(conn, frame_size)
 
         # Conversione da RGB565 a BGR
-        '''rgb565 = np.frombuffer(frame_data, dtype='<u2').reshape((Height, Width))
-        rgb565 = (rgb565 >> 8) | (rgb565 << 8)
-        bgr = np.zeros((Height, Width, 3), dtype=np.uint8)
-        bgr[..., 2] = ((rgb565 >> 11) & 0x1F) << 3
-        bgr[..., 1] = ((rgb565 >> 5) & 0x3F) << 2
-        bgr[..., 0] = (rgb565 & 0x1F) << 3
-        frame = cv2.flip(bgr, -1)'''
         rgb565 = np.frombuffer(frame_data, dtype=np.uint16).reshape((Height, Width))
         rgb565 = (rgb565 >> 8) | (rgb565 << 8)
 
