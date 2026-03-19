@@ -3,33 +3,10 @@
 #include <camera.h>
 #include <comunicazioneEsp.h>
 
-/*
-// saponetta
-const char* ssid = "Andrea-wifi";
-const char* password = "YeAndreaMelata";
-*/
-/*//wifi addis
-const char* ssid = "ViganoHouse 1";
-const char* password = "CrazyBanana2339";*/
-// Wi-Fi giordy
-//const char* ssid = "Vodafone-C02180153";
-//const char* password = "9TYTJssNKgyyyTeT";
-
-// Hotspot
 const char* ssid = "Andrea's S21+";
 const char* password = "gskf7724";
 
-// CONFIGURAZIONE SERVER TCP
-//saponetta
-//const char* server_ip = "192.168.0.160";
-//Wifi giordy
-//const char* server_ip = "192.168.1.15";
-//hotspot
 const char* server_ip = "10.113.153.79";
-//wifi addis
-//const char* server_ip = "192.168.1.17";
-//wifi giordy
-//const char* server_ip = "192.168.1.12";
 const uint16_t server_port = 1234;
 
 SerialTransfer busEsp;
