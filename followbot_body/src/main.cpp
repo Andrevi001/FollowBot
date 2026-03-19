@@ -36,7 +36,7 @@ void setup(){
   ledcAttachPin(PWM, 6);
   ledcWrite(6, 150);
 
-  //APSTBY sempre HIGH (non va mai in standby)
+  //STBY sempre HIGH (non va mai in standby)
   digitalWrite(STBY, HIGH);
 }
 
