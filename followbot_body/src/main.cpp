@@ -3,18 +3,18 @@
 #include <comunicazioneEsp.h>
 
 SerialTransfer busEsp;
-Pan_Tilt pt;
 
 void centerBody();
 void decideFwBw(uint8_t distance);
 
 void setup(){
 
+  //Attivo seriale
   Serial.begin(115200);
   Serial2.begin(115200, SERIAL_8N1, 16, 17);
   busEsp.begin(Serial2);
   
-  
+  //Attivo i servo 
   servoPan.attach(PAN);
   servoTilt.attach(TILT);
   
@@ -75,4 +75,5 @@ void decideFwBw(uint8_t distance) {
     Backward();
   } else {
     Stop();
+  }
 }
