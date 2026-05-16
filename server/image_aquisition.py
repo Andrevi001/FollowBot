@@ -88,7 +88,7 @@ try:
                     pan = offset_x * (40/Width) *0.4
                 if abs(offset_y) > 5: 
                     tilt = offset_y * (30/Height)*0.4
-
+                # Manda i dati al ESP32 visione
                 conn.send(b"\x80" + int(pan).to_bytes(1, 'little', signed=True) + int(tilt).to_bytes(1, 'little', signed=True) + int(distance).to_bytes(1, 'little'))
         else: 
             conn.send(b"\x90" + b"\x90" + b"\x90" +b"\x90")
