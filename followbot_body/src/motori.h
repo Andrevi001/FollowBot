@@ -1,79 +1,147 @@
-#include <servos.h>
-#include <motori.h>
-#include <comunicazioneEsp.h>
+#include <Arduino.h>
 
-SerialTransfer busEsp;
+//Setup motori
+// singolo standby per le due TB6612FNG
+const int8_t STBY = 18;
 
-void centerBody();
-void decideFwBw(uint8_t distance);
+//singolo valore PWM
+const int8_t PWM = 5;
 
-void setup(){
+// canali A e B delle ruote anteriori
+const int8_t AAIN1 = 23; //arancione
+const int8_t AAIN2 = 22; //giallo
 
-  //Attivo seriale
-  Serial.begin(115200);
-  Serial2.begin(115200, SERIAL_8N1, 16, 17);
-  busEsp.begin(Serial2);
-  
-  //Attivo i servo 
-  servoPan.attach(PAN);
-  servoTilt.attach(TILT);
-  
-  pt.centerFov();
+const int8_t ABIN1 = 19; //bianco
+const int8_t ABIN2 = 21; //verde
 
-  //pin logica di controllo per le ruote
-  pinMode(STBY, OUTPUT);
-  pinMode(AAIN1,OUTPUT);
-  pinMode(AAIN2,OUTPUT);
-  pinMode(ABIN1,OUTPUT);
-  pinMode(ABIN2,OUTPUT);
-  pinMode(PAIN1,OUTPUT);
-  pinMode(PAIN2,OUTPUT);
-  pinMode(PBIN1,OUTPUT);
-  pinMode(PBIN2,OUTPUT);
+//canali A e B delle ruote posteriori
+const int8_t PAIN1 = 32; //nero
+const int8_t PAIN2 = 33; //bianco
 
-  //pin regolamento della velocità(PWM)
-  ledcSetup(6, 20000, 8);
-  ledcAttachPin(PWM, 6);
-  ledcWrite(6, 150);
+const int8_t PBIN1 = 14; //marroncino
+const int8_t PBIN2 = 13; //viola
 
-  //STBY sempre HIGH (non va mai in standby)
-  digitalWrite(STBY, HIGH);
+void Forward() {
+  //ruota posteriore sinistra
+  digitalWrite(PAIN1, HIGH);
+  digitalWrite(PAIN2, LOW);
+
+  //ruota posteriore destra
+  digitalWrite(PBIN1, HIGH);
+  digitalWrite(PBIN2, LOW);
+
+  //ruota anteriore destra
+  digitalWrite(ABIN1, HIGH);
+  digitalWrite(ABIN2, LOW);
+
+  //ruota anteriore sinistra
+  digitalWrite(AAIN1, HIGH);
+  digitalWrite(AAIN2, LOW);
 }
 
-void loop() {
-  if (busEsp.available()) {
-    busEsp.rxObj(dati);
-    if ((uint8_t)dati.header == 0x80) {
-      pt.updateServos(dati.pan_sum, dati.tilt_sum);
-      if (pt.getPan() > 170) {
-        turnLeft();
-        pt.centerFov();
-      } else if (pt.getPan() < 10) {
-        turnRight();
-        pt.centerFov();
-      }
-    }
-    decideFwBw(dati.distance);
-  }
+void Backward() {
+  //ruota anteriore sinistra
+  digitalWrite(AAIN1, LOW);
+  digitalWrite(AAIN2, HIGH);
+
+  //ruota anteriore destra
+  digitalWrite(ABIN1, LOW);
+  digitalWrite(ABIN2, HIGH);
+
+  //ruota posteriore sinistra
+  digitalWrite(PAIN1, LOW);
+  digitalWrite(PAIN2, HIGH);
+
+  //ruota posteriore destra
+  digitalWrite(PBIN1, LOW);
+  digitalWrite(PBIN2, HIGH);
 }
 
+void DxRotation() {
+  //ruota anteriore sinistra
+  digitalWrite(AAIN1, LOW);
+  digitalWrite(AAIN2, HIGH);
 
-void centerBody() {
-  if (pt.getPan() <= 10) {
-    turnRight();
-    pt.centerFov();
-  } else if (pt.getPan() >= 170) {
-    turnLeft();
-    pt.centerFov();
-  }
+  //ruota anteriore destra
+  digitalWrite(ABIN1, HIGH);
+  digitalWrite(ABIN2, LOW);
+
+  //ruota posteriore sinistra
+  digitalWrite(PAIN1, LOW);
+  digitalWrite(PAIN2, HIGH);
+
+  //ruota posteriore destra
+  digitalWrite(PBIN1, HIGH);
+  digitalWrite(PBIN2, LOW);
 }
 
-void decideFwBw(uint8_t distance) {
-  if (distance > 170 ) {
-    Forward();
-  } else if (distance < 120 ) {
-    Backward();
-  } else {
-    Stop();
-  }
+void SxRotation() {
+  //ruota anteriore sinistra
+  digitalWrite(AAIN1, HIGH);
+  digitalWrite(AAIN2, LOW);
+
+  //ruota anteriore destra
+  digitalWrite(ABIN1, LOW);
+  digitalWrite(ABIN2, HIGH);
+
+  //ruota posteriore sinistra
+  digitalWrite(PAIN1, HIGH);
+  digitalWrite(PAIN2, LOW);
+
+  //ruota posteriore destra
+  digitalWrite(PBIN1, LOW);
+  digitalWrite(PBIN2, HIGH);
 }
+
+void Stop() {
+  //ruota anteriore sinistra
+  digitalWrite(AAIN1, HIGH);
+  digitalWrite(AAIN2, HIGH);
+
+  //ruota anteriore destra
+  digitalWrite(ABIN1, HIGH);
+  digitalWrite(ABIN2, HIGH);
+
+  //ruota posteriore sinistra
+  digitalWrite(PAIN1, HIGH);
+  digitalWrite(PAIN2, HIGH);
+
+  //ruota posteriore sinistra
+  digitalWrite(PBIN1, HIGH);
+  digitalWrite(PBIN2, HIGH);
+
+  delay(100);
+
+  //ruota posteriore destra
+  digitalWrite(PBIN1, HIGH);
+  digitalWrite(PBIN2, HIGH);
+
+  //ruota anteriore sinistra
+  digitalWrite(AAIN1, LOW);
+  digitalWrite(AAIN2, LOW);
+
+  //ruota anteriore destra
+  digitalWrite(ABIN1, LOW);
+  digitalWrite(ABIN2, LOW);
+
+  //ruota posteriore sinistra
+  digitalWrite(PAIN1, LOW);
+  digitalWrite(PAIN2, LOW);
+
+  //ruota posteriore destra
+  digitalWrite(PBIN1, LOW);
+  digitalWrite(PBIN2, LOW);
+}
+
+void turnRight() {
+  DxRotation();
+  delay(650);
+  Stop();
+}
+
+void turnLeft() {
+  SxRotation();
+  delay(650);
+  Stop();
+}
+
