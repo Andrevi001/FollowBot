@@ -69,7 +69,6 @@ try:
         if faces is not None:
             for face in faces:
                 x, y, w, h = face[0:4].astype(int)
-                confidence = face[14]
                 
                 x = int(x * (Width / Fwidth))
                 y = int(y * (Height / Fheight))

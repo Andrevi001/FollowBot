@@ -45,7 +45,7 @@ void loop() {
     busEsp.rxObj(dati);
     if ((uint8_t)dati.header == 0x80) {
       pt.updateServos(dati.pan_sum, dati.tilt_sum);
-      if (pt.getPan() > 170) {
+      if (pt.getPan() > 130) {
         turnLeft();
         pt.centerFov();
       } else if (pt.getPan() < 10) {
