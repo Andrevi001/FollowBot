@@ -4,22 +4,22 @@
 
     [ PACCO BATTERIE 18650 x4 ] (In Serie: ~14.8V nominali)
                 │
-                ├───(Linea ROSSA: VCC Diretto 14.8V) ──────────────────────────┐
+                ├───(VCC Diretto 14.8V)────────────────────────────────────────┐
                 │                                                              │
-                	▼                                                              			            ▼
+                ▼                                                              ▼
     ┌───────────────────────┐                                      ┌───────────────────────┐
     │ BUCK CONVERTER LM2596 │                                      │ BUCK CONVERTER LM2596 │
     │  (Uscita Potenza: 6V) │                                      │  (Uscita Logica: 3.3V)│
     └───────────┬───────────┘                                      └───────────┬───────────┘
                 │                                                              │
-                │ (Linea ARANCIONE: Potenza 6V)                                │ (Linea GIALLA: Logica 3.3V)
+                │                                                              │ 
                 ├───> [ TB6612FNG ANT ] (Pin VM) ───> [ 2x MOTORI ANT ]        ├───> [ ESP32 REGOLARE ] (Pin 3V3)
                 │                                                              ├───> [ ESP32-WROVER ] (Pin 3V3)
                 ├───> [ TB6612FNG POST ] (Pin VM) ───> [ 2x MOTORI POST ]      ├───> [ TB6612FNG ANT ] (Pin VCC)
                 │                                                              └───> [ TB6612FNG POST ] (Pin VCC)
                 │ (Estensione Linea 6V)
-                ├───> [ SERVO PAN ] (Cavo Rosso)
-                └───> [ SERVO TILT ] (Cavo Rosso)
+                ├───> [ SERVO PAN ]
+                └───> [ SERVO TILT ]
 
 
 =======================================================================================================================
@@ -30,22 +30,20 @@
   │                  ESP32 REGOLARE                  │               │         ESP32-WROVER + OV3660        │
   │               (Logica di Controllo)              │               │          (Elaborazione Video)        │
   │                                                  │               │                                      │
-  │      Pin TX (GPIO 17)  ─[Linea Blu]──────────────┼──────────────>│ Pin RX (GPIO 33)                     │
-  │      Pin RX (GPIO 16)  ─[Linea Viola]────────────┼───────────────│ Pin TX (GPIO 35)                     │
+  │                                  Pin TX (GPIO 17)┼───────────────│ Pin RX (GPIO 33)                     │
+  │                                  Pin RX (GPIO 16)┼───────────────│ Pin TX (GPIO 35)                     │
   └──────────────┬───────────────────┬───────────────┘               └──────────────────────────────────────┘
                  │                   │
-      [Linea VERDE: Segnali PWM]     │ [Linea VERDE: Segnali PWM e Direzione]
+          [Segnali PWM]              │ [Segnali PWM e Direzione]
                  │                   │
-                 	 ▼                   ├───> [ TB6612FNG ANTERIORE ]
-          ┌───────────────┐          │      ├──> Controllo Velocità (PWMA, PWMB)
+                 ▼                   ├───> [ TB6612FNG ANTERIORE ]
+          ┌───────────────┐          │      ├──> Controllo Velocità (PWM)
           │   SERVO PAN   │          │      └──> Controllo Direzione (AIN1, AIN2, BIN1, BIN2, STBY)
-          │ (Cavo Giallo) │          │
           └───────────────┘          └───> [ TB6612FNG POSTERIORE ]
-                 │                          ├──> Controllo Velocità (PWMA, PWMB)
-                 	 ▼                          └──> Controllo Direzione (AIN1, AIN2, BIN1, BIN2, STBY)
+                 │                          ├──> Controllo Velocità (PWM)
+                 ▼                          └──> Controllo Direzione (AIN1, AIN2, BIN1, BIN2, STBY)
           ┌───────────────┐
-          │  SERVO TILT   │
-          │ (Cavo Giallo) │
+          │  SERVO TILT   |
           └───────────────┘
 
 
@@ -56,7 +54,7 @@
    BUCK 6V    BUCK 3.3V     ESP32     ESP32 WROV    TB6612 ANT   TB6612 POST    SERVO PAN	SERVO TILT
    (OUT-)     (OUT-)        (GND)        (GND)         (GND)        (GND)        (GND)		  (GND)
     │           │             │            │            │             │            │  		    │    
-       ▼           	▼	          ▼            	     ▼                     ▼                      ▼                    ▼                            ▼
+    ▼           ▼	            ▼            ▼            ▼             ▼            ▼          ▼
 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ████████████████████████████████████████ DORSALE PRINCIPALE GND ███████████████████████████████████████████████████████
 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
