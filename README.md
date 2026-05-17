@@ -10,9 +10,9 @@ Se ci sono più volti presenti nel frame il comportamneto è imprevedibile.
 ---
 
 ## Caratteristiche
-- Rilevamento del volti tramite **ESP32-WROVER-KIT**
+- Rilevamento immagine tramite **ESP32-WROVER-KIT**
 - Movimento autonomo 4WD/pan-tilti controllato da **ESP32**
-- Elaborazione immagine tramite **Python**
+- Elaborazione immagine tramite **Python** su server
 
 ---
 
@@ -27,7 +27,7 @@ Se ci sono più volti presenti nel frame il comportamneto è imprevedibile.
 - **UART** per la cominicazione tra le ESP32.
 - 4x **Batterie 18650** per l'alimentazione
 - **PlatformIO** per la programmazione
-- **Python** sul server per l’elaborazione delle immagini e il riconoscimento dei gesti
+- **Python** sul server per l’elaborazione delle immagini && riconoscimento volti
 
 ---
 
